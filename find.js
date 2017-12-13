@@ -4,9 +4,10 @@ var boxWidth = box.offsetWidth;
 
 //hardcode target as center
 //randomize later
-var targetX = boxWidth / 2;
-var targetY = boxHeight / 2;
-
+//var targetX = boxWidth / 2;
+//var targetY = boxHeight / 2;
+var targetX = Math.random() * boxWidth;
+var targetY = Math.random() * boxHeight;
 
 console.log( "box height: " + boxHeight );
 console.log( "box width: " + boxWidth );
@@ -21,11 +22,14 @@ var distance = function (x0, y0, x1, y1) {
 console.log(distance(0,0,3,4));
 
 var findIt = function(e) {
-  console.log(e.x + ',' + e.y);
+  console.log(e.x + ',' + e.y + ' | ' + targetX + ',' + targetY);
   console.log(distance(e.x,e.y,targetX,targetY));
-  var maxDistance = distance(0,0,boxHeight,boxWidth);
+  
+  
+  var maxDist = maxDistance(targetX,targetY);
+  
   var currentDistance = distance(e.x,e.y,targetX,targetY);
-  var colorString = 'rgb(' + '0,0,' + Math.floor(256 - (256*currentDistance/maxDistance)) + ')';
+  var colorString = 'rgb(' + '0,0,' + Math.floor(256 - (256*currentDistance/maxDist)) + ')';
   console.log(colorString);
   box.style.backgroundColor=colorString;
 };
@@ -34,6 +38,19 @@ var findIt = function(e) {
 your OTHER FXNS
 
 */
+var maxDistance = function(pX,pY){
+	var maxX = 0;
+	var maxY = 0;
+	if (pX < box.offsetWidth/2){
+		maxX = box.offsetWidth;
+	}
+	if (pY < box.offsetHeight/2){
+		maxY = box.offsetHeight;
+	}
+	return distance(pX,pY,maxX,maxY);
+}
+
+
 
 box.addEventListener("mousemove", findIt);
 
