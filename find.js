@@ -22,6 +22,12 @@ console.log(distance(0,0,3,4));
 
 var findIt = function(e) {
   console.log(e.x + ',' + e.y);
+  console.log(distance(e.x,e.y,targetX,targetY));
+  var maxDistance = distance(0,0,boxHeight,boxWidth);
+  var currentDistance = distance(e.x,e.y,targetX,targetY);
+  var colorString = 'rgb(' + '0,0,' + Math.floor(256 - (256*currentDistance/maxDistance)) + ')';
+  console.log(colorString);
+  box.style.backgroundColor=colorString;
 };
 
 /*
