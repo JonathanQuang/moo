@@ -32,6 +32,11 @@ var findIt = function(e) {
   var colorString = 'rgb(' + '0,0,' + Math.floor(256 - (256*currentDistance/maxDist)) + ')';
   console.log(colorString);
   box.style.backgroundColor=colorString;
+	if (isCloseEnough(e.x,e.y,targetX,targetY,10)){
+		box.style.backgroundColor="white";
+		box.style.backgroundImage="url('http://www.incredibleegg.org/wp-content/themes/incredibleegg/assets/images/facts-left-egg.png')";
+	}	
+
 };
 
 /*
@@ -48,7 +53,12 @@ var maxDistance = function(pX,pY){
 		maxY = box.offsetHeight;
 	}
 	return distance(pX,pY,maxX,maxY);
-}
+};
+
+var isCloseEnough = function(cursorX,cursorY,targetX,targetY,threshold){
+	return (distance(cursorX,cursorY,targetX,targetY) <= threshold);
+	
+};
 
 
 
